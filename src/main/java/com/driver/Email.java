@@ -10,6 +10,42 @@ public class Email {
         this.password = "Accio@123";
     }
 
+
+    public void changePassword(String oldPassword, String newPassword) {
+        //Change password only if the oldPassword is equal to current password and the new password meets all of the following:
+        // 1. It contains at least 8 characters
+        // 2. It contains at least one uppercase letter
+        // 3. It contains at least one lowercase letter
+        // 4. It contains at least one digit
+        // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
+
+        boolean characters = false;
+        boolean upperCase = false;
+        boolean lowerCase = false;
+        boolean digit = false;
+        boolean specialChar = false;
+        if (this.password.equals(oldPassword)) {
+            if (newPassword.length() >= 8) characters = true;
+
+            for (int i = 0; i < newPassword.length(); i++) {
+
+                char ch = newPassword.charAt(i);
+
+                if (ch >= 'a' && ch <= 'z') {
+                    lowerCase = true;
+                } else if (ch >= 'A' && ch <= 'Z') {
+                    upperCase = true;
+                } else if (Character.getNumericValue(ch) >= 0 && Character.getNumericValue(ch) <= 9) {
+                    digit = true;
+                } else {
+                    specialChar = true;
+                }
+            }
+            if (characters && upperCase && lowerCase && digit && specialChar) {
+                this.password = newPassword;
+            }
+        }
+    }
     public String getEmailId() {
         return emailId;
     }
@@ -18,77 +54,11 @@ public class Email {
         return password;
     }
 
-    public void changePassword(String oldPassword, String newPassword){
-        //Change password only if the oldPassword is equal to current password and the new password meets all of the following:
-        // 1. It contains at least 8 characters
-        // 2. It contains at least one uppercase letter
-        // 3. It contains at least one lowercase letter
-        // 4. It contains at least one digit
-        // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
-        if(this.password.equals(oldPassword))
-        {
-            boolean flag1 = false;
-            if(newPassword.length() >=8)
-            {
-                flag1 = true;
-            }
-            boolean flag2 = false;
-            for(int i=0;i<newPassword.length();i++)
-            {
-                if(newPassword.charAt(i)>='A' && newPassword.charAt(i)<='Z')
-                {
-                    flag2 = true;
-                    break;
-
-                }
-            }
-            boolean flag3 = false;
-            for(int i=0;i<newPassword.length();i++)
-            {
-                if(newPassword.charAt(i)>='a' && newPassword.charAt(i)<='z')
-                {
-                    flag3 = true;
-                    break;
-
-                }
-            }
-            boolean flag4 = false;
-            for(int i=0;i<newPassword.length();i++)
-            {
-                if(newPassword.charAt(i)>='0' && newPassword.charAt(i)<='9')
-                {
-                    flag4 = true;
-                    break;
-
-                }
-            }
-            boolean flag5 = false;
-            for(int i=0;i<newPassword.length();i++)
-            {
-                if (!Character.isDigit(newPassword.charAt(i))
-                        && !Character.isLetter(newPassword.charAt(i))
-                        && !Character.isWhitespace(newPassword.charAt(i)))
-                {
-                    flag5 = true;
-                    break;
-
-                }
-            }
-
-            if(flag1 && flag2 && flag3 && flag4 && flag5)
-            {
-                setPassword(newPassword);
-            }
-
-        }
-
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
-    public void setPassword(String password)
-    {
+
+    public void setPassword(String password) {
         this.password = password;
-    }
-    public void setEmailId(String email)
-    {
-        this.emailId = email;
     }
 }
