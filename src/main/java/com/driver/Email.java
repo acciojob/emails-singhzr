@@ -25,7 +25,7 @@ public class Email {
         boolean digit = false;
         boolean specialChar = false;
 
-        if(newPassword.length() == 8) characters = true;
+        if(newPassword.length() >= 8) characters = true;
 
         for(int i = 0; i < newPassword.length(); i++){
 
